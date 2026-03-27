@@ -21,7 +21,7 @@ export function parsePaletteCsv(csvText) {
   const errors = [];
   const lines = csvText.trim().split(/\r?\n/);
 
-  if (lines.length === 0) {
+  if (lines.length === 0 || (lines.length === 1 && !lines[0].trim())) {
     errors.push('Empty CSV file.');
     return { colors, errors };
   }
