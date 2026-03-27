@@ -72,13 +72,3 @@
   gap: var(--space-xs);
 }
 
-.result-card-states {
-  font-size: 0.8rem;
-  color: var(--text-muted);
-  border-top: 1px solid var(--border-color);
-  padding-top: var(--space-sm);
-}
-
-.result-card-states summary {
-  cursor: pointer;
-}

@@ -66,23 +66,10 @@ function createResultCard(result, preferences) {
   badges.appendChild(makeBadge('Large', result.largeText));
   badges.appendChild(makePassFailBadge('UI', result.nonText));
 
-  const states = document.createElement('details');
-  states.className = 'result-card-states';
-  states.innerHTML = `
-    <summary>State checks</summary>
-    <div style="margin-top: var(--space-xs);">
-      Hover: ${formatStateResult(result.stateChecks.hover)} |
-      Focus: ${formatStateResult(result.stateChecks.focus)} |
-      Active: ${formatStateResult(result.stateChecks.active)} |
-      Disabled: ${formatStateResult(result.stateChecks.disabled)}
-    </div>
-  `;
-
   card.appendChild(header);
   card.appendChild(preview);
   card.appendChild(ratio);
   card.appendChild(badges);
-  card.appendChild(states);
 
   return card;
 }
@@ -103,11 +90,7 @@ function makePassFailBadge(label, level) {
   return span;
 }
 
-function formatStateResult(check) {
-  if (!check) return 'N/A';
-  const best = check.normalText !== 'fail' ? check.normalText : check.largeText !== 'fail' ? check.largeText : check.nonText;
-  return best === 'fail' ? 'Fail' : 'Pass';
-}
+
 
 export function applyFilters(results, filters) {
   return results.filter((r) => {
