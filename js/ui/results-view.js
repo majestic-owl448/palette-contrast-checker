@@ -64,7 +64,7 @@ function createResultCard(result, preferences) {
   badges.className = 'result-card-badges';
   badges.appendChild(makeBadge('Normal', result.normalText));
   badges.appendChild(makeBadge('Large', result.largeText));
-  badges.appendChild(makeBadge('UI', result.nonText));
+  badges.appendChild(makePassFailBadge('UI', result.nonText));
 
   const states = document.createElement('details');
   states.className = 'result-card-states';
@@ -92,6 +92,14 @@ function makeBadge(label, level) {
   const icon = level === 'fail' ? '\u2717' : '\u2713';
   span.className = `badge badge-${level === 'fail' ? 'fail' : level === 'AAA' ? 'aaa' : 'aa'}`;
   span.textContent = `${icon} ${label}: ${level === 'fail' ? 'Fail' : level}`;
+  return span;
+}
+
+function makePassFailBadge(label, level) {
+  const pass = level !== 'fail';
+  const span = document.createElement('span');
+  span.className = `badge ${pass ? 'badge-aaa' : 'badge-fail'}`;
+  span.textContent = `${pass ? '\u2713' : '\u2717'} ${label}: ${pass ? 'Pass' : 'Fail'}`;
   return span;
 }
 
