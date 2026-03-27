@@ -99,7 +99,7 @@ function makePassFailBadge(label, level) {
   const pass = level !== 'fail';
   const span = document.createElement('span');
   span.className = `badge ${pass ? 'badge-aaa' : 'badge-fail'}`;
-  span.textContent = `${pass ? '\u2713' : '\u2717'} ${label}: ${pass ? 'Pass' : 'Fail'}`;
+  span.textContent = `${pass ? '\u2713' : '\u2717'} ${label}: ${pass ? level : 'Fail'}`;
   return span;
 }
 
