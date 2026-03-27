@@ -51,6 +51,11 @@
   gap: var(--space-lg);
   min-width: 0;
   overflow: hidden;
+  align-content: start;
+}
+
+.main-content > :empty {
+  display: none;
 }
 
 @media (max-width: 1000px) {

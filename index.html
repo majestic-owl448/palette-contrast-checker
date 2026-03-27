@@ -35,7 +35,7 @@
         <section class="section-panel" id="palette-editor">
           <h2>Palette</h2>
           <div class="palette-input-row">
-            <div class="form-group" style="flex:1">
+            <div class="form-group">
               <label for="color-input">Add a color</label>
               <input
                 type="text"
@@ -46,11 +46,10 @@
                 spellcheck="false"
               >
             </div>
-            <button class="btn btn-primary" id="add-color-btn" title="Add color">Add</button>
-            <button class="btn btn-secondary" id="eyedropper-btn" title="Pick color from screen">
-              <span aria-hidden="true">&#128065;</span>
-              <span class="sr-only">Pick color from screen</span>
-            </button>
+            <div class="palette-input-buttons">
+              <button class="btn btn-primary" id="add-color-btn" title="Add color">Add</button>
+              <button class="btn-icon" id="eyedropper-btn" title="Pick color from screen" aria-label="Pick color from screen">&#128065;</button>
+            </div>
           </div>
           <div class="color-validation" id="color-validation" aria-live="polite"></div>
 

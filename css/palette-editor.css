@@ -2,10 +2,20 @@
   display: flex;
   gap: var(--space-sm);
   align-items: flex-end;
+  flex-wrap: wrap;
+}
+
+.palette-input-row .form-group {
+  flex: 1 1 100%;
 }
 
 .palette-input-row .form-input {
-  flex: 1;
+  width: 100%;
+}
+
+.palette-input-buttons {
+  display: flex;
+  gap: var(--space-sm);
 }
 
 .palette-list {
