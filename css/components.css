@@ -1,0 +1,249 @@
+/* === Buttons === */
+
+.btn {
+  font-family: var(--font-prose);
+  font-size: 1rem;
+  font-weight: 700;
+  border: none;
+  border-radius: var(--border-radius);
+  padding: var(--space-sm) var(--space-md);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  transition: opacity 0.15s;
+}
+
+.btn:hover {
+  opacity: 0.9;
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn-primary {
+  background: var(--color-cta);
+  color: var(--color-cta-text);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--text-secondary);
+  border: 1px solid var(--border-color);
+}
+
+.btn-secondary:hover {
+  background: var(--surface-bg);
+}
+
+.btn-danger {
+  background: var(--color-error);
+  color: var(--primary-bg);
+}
+
+.btn-sm {
+  font-size: 0.85rem;
+  padding: var(--space-xs) var(--space-sm);
+}
+
+.btn-icon {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: var(--space-xs);
+  border-radius: var(--border-radius);
+  font-size: 1rem;
+  line-height: 1;
+}
+
+.btn-icon:hover {
+  color: var(--text-primary);
+  background: var(--surface-bg);
+}
+
+/* === Forms === */
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.form-group label {
+  font-size: 0.9rem;
+  color: var(--text-tertiary);
+  font-weight: 700;
+}
+
+.form-input {
+  font-family: var(--font-mono);
+  font-size: 1rem;
+  background: var(--primary-bg);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  padding: var(--space-sm) var(--space-md);
+}
+
+.form-input::placeholder {
+  color: var(--text-muted);
+}
+
+.form-input:focus {
+  outline: 2px solid var(--focus-outline);
+  outline-offset: 1px;
+}
+
+.form-input-error {
+  border-color: var(--color-error);
+}
+
+.form-error {
+  color: var(--color-error);
+  font-size: 0.85rem;
+}
+
+.form-row {
+  display: flex;
+  gap: var(--space-sm);
+  align-items: flex-end;
+}
+
+select.form-input {
+  appearance: auto;
+}
+
+/* === Range Slider === */
+
+input[type="range"] {
+  width: 100%;
+  accent-color: var(--color-cta);
+}
+
+/* === Badges === */
+
+.badge {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 2px var(--space-sm);
+  border-radius: var(--border-radius);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  white-space: nowrap;
+}
+
+.badge-aaa {
+  background: var(--badge-aaa);
+  color: var(--primary-bg);
+}
+
+.badge-aa {
+  background: var(--badge-aa);
+  color: var(--primary-bg);
+}
+
+.badge-fail {
+  background: var(--badge-fail);
+  color: var(--primary-bg);
+}
+
+/* === Alerts === */
+
+.alert {
+  padding: var(--space-md);
+  border-radius: var(--border-radius);
+  font-size: 0.95rem;
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-sm);
+}
+
+.alert-warning {
+  background: var(--yellow-dark);
+  color: var(--color-warning);
+  border: 1px solid var(--color-warning);
+}
+
+.alert-error {
+  background: var(--red-dark);
+  color: var(--color-error);
+  border: 1px solid var(--color-error);
+}
+
+.alert-info {
+  background: var(--blue-dark);
+  color: var(--color-link);
+  border: 1px solid var(--color-link);
+}
+
+.alert-success {
+  background: var(--green-dark);
+  color: var(--color-success);
+  border: 1px solid var(--color-success);
+}
+
+/* === Modal === */
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: var(--gray-90-translucent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 300;
+}
+
+.modal-overlay[hidden] {
+  display: none;
+}
+
+.modal {
+  background: var(--surface-bg);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  padding: var(--space-lg);
+  max-width: 500px;
+  width: 90%;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.modal h3 {
+  margin-bottom: var(--space-md);
+}
+
+.modal-actions {
+  display: flex;
+  gap: var(--space-sm);
+  justify-content: flex-end;
+  margin-top: var(--space-lg);
+}
+
+/* === Color Swatch === */
+
+.color-swatch {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--border-radius);
+  border: 2px solid var(--border-color);
+  flex-shrink: 0;
+}
+
+.color-swatch-lg {
+  width: 48px;
+  height: 48px;
+}
+
+/* === Empty State === */
+
+.empty-state {
+  text-align: center;
+  padding: var(--space-2xl) var(--space-lg);
+  color: var(--text-muted);
+}

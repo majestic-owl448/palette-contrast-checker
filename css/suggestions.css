@@ -1,0 +1,62 @@
+.suggestions-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-md);
+}
+
+.suggestions-column h3 {
+  margin-bottom: var(--space-sm);
+  font-size: 1rem;
+}
+
+.suggestion-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-sm);
+  background: var(--surface-bg);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  margin-bottom: var(--space-sm);
+  cursor: pointer;
+}
+
+.suggestion-item:hover {
+  border-color: var(--color-link);
+}
+
+.suggestion-item.selected {
+  border-color: var(--color-cta);
+  background: var(--primary-bg);
+}
+
+.suggestion-item input[type="checkbox"] {
+  accent-color: var(--color-cta);
+  flex-shrink: 0;
+}
+
+.suggestion-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.suggestion-hex {
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+}
+
+.suggestion-type {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.suggestion-pairs {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.suggestions-actions {
+  margin-top: var(--space-md);
+  display: flex;
+  gap: var(--space-sm);
+}

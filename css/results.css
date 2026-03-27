@@ -1,0 +1,78 @@
+.results-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-md);
+  align-items: center;
+}
+
+.results-toolbar select,
+.results-toolbar .form-input {
+  font-size: 0.85rem;
+  padding: var(--space-xs) var(--space-sm);
+}
+
+.results-count {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-left: auto;
+}
+
+.results-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: var(--space-md);
+}
+
+.result-card {
+  background: var(--surface-bg);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  padding: var(--space-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.result-card-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+}
+
+.result-card-arrow {
+  color: var(--text-muted);
+}
+
+.result-card-preview {
+  border-radius: var(--border-radius);
+  padding: var(--space-md);
+  min-height: 60px;
+  display: flex;
+  align-items: center;
+}
+
+.result-card-ratio {
+  font-family: var(--font-mono);
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.result-card-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+}
+
+.result-card-states {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  border-top: 1px solid var(--border-color);
+  padding-top: var(--space-sm);
+}
+
+.result-card-states summary {
+  cursor: pointer;
+}

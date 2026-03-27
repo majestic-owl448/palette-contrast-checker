@@ -1,0 +1,60 @@
+.storage-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+}
+
+.saved-palettes-list {
+  list-style: none;
+  margin-top: var(--space-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.saved-palette-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-sm);
+  background: var(--surface-bg);
+  border-radius: var(--border-radius);
+  border: 1px solid transparent;
+}
+
+.saved-palette-item:hover {
+  border-color: var(--border-color);
+}
+
+.saved-palette-name {
+  font-weight: 700;
+}
+
+.saved-palette-meta {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.save-dialog {
+  display: flex;
+  gap: var(--space-sm);
+  align-items: flex-end;
+  margin-top: var(--space-md);
+}
+
+.save-dialog .form-input {
+  flex: 1;
+}
+
+.export-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  margin-top: var(--space-md);
+}
+
+.export-group h3 {
+  width: 100%;
+  font-size: 0.95rem;
+  color: var(--text-tertiary);
+}

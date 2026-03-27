@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0a0a23">
+  <title>Palette Contrast Checker</title>
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/palette-editor.css">
+  <link rel="stylesheet" href="css/results.css">
+  <link rel="stylesheet" href="css/suggestions.css">
+  <link rel="stylesheet" href="css/storage-panel.css">
+  <link rel="stylesheet" href="css/utilities.css">
+</head>
+<body>
+  <header class="app-header">
+    <h1>Palette Contrast Checker</h1>
+  </header>
+
+  <main class="app-main">
+    <!-- Recovery banner -->
+    <div id="recovery-banner" class="alert alert-info" hidden>
+      <span>A saved work-in-progress palette was found.</span>
+      <button class="btn btn-sm btn-primary" id="recovery-restore-btn">Restore</button>
+      <button class="btn btn-sm btn-secondary" id="recovery-dismiss-btn">Dismiss</button>
+    </div>
+
+    <div class="two-column">
+      <!-- === SIDEBAR === -->
+      <div class="sidebar">
+        <!-- Palette Editor -->
+        <section class="section-panel" id="palette-editor">
+          <h2>Palette</h2>
+          <div class="palette-input-row">
+            <div class="form-group" style="flex:1">
+              <label for="color-input">Add a color</label>
+              <input
+                type="text"
+                id="color-input"
+                class="form-input"
+                placeholder="#ff0080, rgb(255,0,128), coral..."
+                autocomplete="off"
+                spellcheck="false"
+              >
+            </div>
+            <button class="btn btn-primary" id="add-color-btn" title="Add color">Add</button>
+            <button class="btn btn-secondary" id="eyedropper-btn" title="Pick color from screen">
+              <span aria-hidden="true">&#128065;</span>
+              <span class="sr-only">Pick color from screen</span>
+            </button>
+          </div>
+          <div class="color-validation" id="color-validation" aria-live="polite"></div>
+
+          <ul class="palette-list" id="palette-list" aria-label="Palette colors">
+          </ul>
+          <div class="palette-count" id="palette-count"></div>
+        </section>
+
+        <!-- Preview Controls -->
+        <section class="section-panel" id="preview-controls">
+          <h2>Preview Settings</h2>
+          <div class="form-group">
+            <label for="preview-text-input">Preview text</label>
+            <input
+              type="text"
+              id="preview-text-input"
+              class="form-input"
+              value="The quick brown fox jumps over the lazy dog."
+            >
+          </div>
+          <div class="form-group" style="margin-top: var(--space-md)">
+            <label for="font-family-select">Font family</label>
+            <select id="font-family-select" class="form-input">
+              <option value="Arial">Arial</option>
+              <option value="Georgia">Georgia</option>
+              <option value="Verdana">Verdana</option>
+              <option value="Trebuchet MS">Trebuchet MS</option>
+              <option value="Times New Roman">Times New Roman</option>
+              <option value="Courier New">Courier New</option>
+              <option value="system-ui">system-ui</option>
+            </select>
+          </div>
+          <div class="form-group" style="margin-top: var(--space-md)">
+            <label for="font-size-slider">
+              Font size: <span id="font-size-value">18</span>px
+            </label>
+            <input
+              type="range"
+              id="font-size-slider"
+              min="12"
+              max="48"
+              value="18"
+              step="1"
+            >
+          </div>
+        </section>
+
+        <!-- Analysis Controls -->
+        <section class="section-panel" id="analysis-controls">
+          <button class="btn btn-primary" id="analyze-btn" style="width:100%" disabled>
+            Analyze Palette
+          </button>
+          <div id="analysis-warning" class="alert alert-warning" hidden style="margin-top:var(--space-md)">
+            <span>Your palette has more than 10 colors. Analysis may be slow or crash the browser.</span>
+            <button class="btn btn-sm btn-primary" id="analyze-anyway-btn">Analyze Anyway</button>
+          </div>
+        </section>
+
+        <!-- Save / Load / Import / Export -->
+        <section class="section-panel" id="storage-panel">
+          <h2>Save &amp; Export</h2>
+          <div class="storage-actions">
+            <button class="btn btn-secondary btn-sm" id="save-palette-btn">Save Palette</button>
+            <button class="btn btn-secondary btn-sm" id="load-palette-btn">Load Palette</button>
+            <button class="btn btn-secondary btn-sm" id="import-csv-btn">Import CSV</button>
+            <button class="btn btn-secondary btn-sm" id="export-csv-btn">Export CSV</button>
+            <button class="btn btn-secondary btn-sm" id="share-url-btn">Share URL</button>
+          </div>
+
+          <div id="save-dialog" hidden>
+            <div class="save-dialog">
+              <div class="form-group" style="flex:1">
+                <label for="save-name-input">Palette name</label>
+                <input type="text" id="save-name-input" class="form-input" placeholder="My palette">
+              </div>
+              <button class="btn btn-primary btn-sm" id="save-confirm-btn">Save</button>
+              <button class="btn btn-secondary btn-sm" id="save-cancel-btn">Cancel</button>
+            </div>
+            <div id="save-overwrite-warning" class="alert alert-warning" hidden style="margin-top:var(--space-sm)">
+            </div>
+          </div>
+
+          <div id="load-dialog" hidden>
+            <ul class="saved-palettes-list" id="saved-palettes-list"></ul>
+          </div>
+
+          <div class="export-group" id="analysis-export-group" hidden>
+            <h3>Export Analysis</h3>
+            <button class="btn btn-secondary btn-sm" id="export-md-btn">Markdown</button>
+            <button class="btn btn-secondary btn-sm" id="export-analysis-csv-btn">CSV</button>
+            <button class="btn btn-secondary btn-sm" id="export-json-btn">JSON</button>
+          </div>
+        </section>
+      </div>
+
+      <!-- === MAIN CONTENT === -->
+      <div class="main-content">
+        <!-- Alerts -->
+        <div id="alerts-container" aria-live="polite"></div>
+
+        <!-- Results -->
+        <section class="section-panel" id="results-section" hidden>
+          <h2>Results</h2>
+          <div class="results-toolbar" id="results-toolbar">
+            <select id="filter-level" class="form-input" aria-label="Filter by level">
+              <option value="all">All levels</option>
+              <option value="fail">Failures only</option>
+              <option value="AA">AA pass</option>
+              <option value="AAA">AAA pass</option>
+            </select>
+            <select id="filter-category" class="form-input" aria-label="Filter by category">
+              <option value="all">All categories</option>
+              <option value="normalText">Normal text</option>
+              <option value="largeText">Large text</option>
+              <option value="nonText">Non-text UI</option>
+            </select>
+            <select id="filter-foreground" class="form-input" aria-label="Filter by foreground">
+              <option value="">Any foreground</option>
+            </select>
+            <select id="filter-background" class="form-input" aria-label="Filter by background">
+              <option value="">Any background</option>
+            </select>
+            <select id="sort-select" class="form-input" aria-label="Sort results">
+              <option value="contrast-desc">Highest contrast</option>
+              <option value="contrast-asc">Lowest contrast</option>
+              <option value="pass-status">Pass status</option>
+              <option value="foreground">Foreground color</option>
+              <option value="background">Background color</option>
+            </select>
+            <span class="results-count" id="results-count"></span>
+          </div>
+          <div class="results-grid" id="results-grid"></div>
+        </section>
+
+        <!-- Suggestions -->
+        <section class="section-panel" id="suggestions-section" hidden>
+          <h2>Suggested Colors</h2>
+          <p class="text-muted" style="margin-bottom:var(--space-md)">
+            These colors would improve your palette's contrast coverage.
+            Select any you'd like to add.
+          </p>
+          <div class="suggestions-grid" id="suggestions-grid"></div>
+          <div class="suggestions-actions">
+            <button class="btn btn-primary" id="add-suggestions-btn" disabled>Add Selected to Palette</button>
+            <button class="btn btn-secondary" id="generate-suggestions-btn">Generate New Suggestions</button>
+          </div>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <!-- Merge Resolution Modal -->
+  <div class="modal-overlay" id="merge-modal" hidden>
+    <div class="modal" role="dialog" aria-labelledby="merge-modal-title">
+      <h3 id="merge-modal-title">Duplicate Color Detected</h3>
+      <p id="merge-modal-desc"></p>
+      <div id="merge-modal-options"></div>
+      <div class="modal-actions">
+        <button class="btn btn-secondary" id="merge-cancel-btn">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Overwrite Confirmation Modal -->
+  <div class="modal-overlay" id="overwrite-modal" hidden>
+    <div class="modal" role="dialog" aria-labelledby="overwrite-modal-title">
+      <h3 id="overwrite-modal-title">Overwrite Palette?</h3>
+      <p id="overwrite-modal-desc"></p>
+      <div id="overwrite-modal-preview"></div>
+      <div class="modal-actions">
+        <button class="btn btn-secondary" id="overwrite-cancel-btn">Cancel</button>
+        <button class="btn btn-danger" id="overwrite-confirm-btn">Overwrite</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Hidden file input for CSV import -->
+  <input type="file" id="csv-file-input" accept=".csv" hidden>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>
