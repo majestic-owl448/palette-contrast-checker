@@ -15,6 +15,7 @@ import { initPreviewControls } from './preview-controls.js';
 import { initSuggestionsPanel } from './suggestions-panel.js';
 import { initStoragePanel } from './storage-panel.js';
 import { initAlerts } from './alerts.js';
+import { initDragReorder } from './drag-reorder.js';
 
 export let store;
 
@@ -75,6 +76,7 @@ export function initApp() {
   initSuggestionsPanel(store);
   initStoragePanel(store);
   initAlerts(store);
+  initDragReorder(store);
 }
 
 function initRecoveryBanner(wipPalette) {
